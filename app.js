@@ -21,10 +21,6 @@ app.use(function (req, res, next) {
 });
 
 if (process.env.NODE_ENV === 'production') {
-    // app.use(express.static('react/build'));
-    // app.get('*', (request, response, next) => {
-    //     response.sendFile(path.resolve(__dirname, 'react', 'build', 'index.html'));
-    // })
     app.get('*', (request, response, next) => {
         response.send('We are in business');
     })
