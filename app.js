@@ -20,11 +20,11 @@ app.use(function (req, res, next) {
     next()
 });
 
-if (process.env.NODE_ENV === 'production') {
-    app.get('*', (request, response, next) => {
-        response.send('We are in business');
-    })
-}
+// if (process.env.NODE_ENV === 'production') {
+//     app.get('*', (request, response, next) => {
+//         response.send('We are in business');
+//     })
+// }
 
 app.use(session ({
     secret: 'secret',
