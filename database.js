@@ -3,8 +3,8 @@ const ObjectId = require('mongodb').ObjectID;
 const bcryptjs = require('bcryptjs');
 
 
-const mongoUrl = process.env.MONGODB_URL || 'mongodb://Ibrahim:Mongodb@ds019996.mlab.com:19996/heroku_btfnf2m2' ; 
-//'mongodb+srv://Ibrahim:Mongodb@cluster0-wvxxp.mongodb.net/cms?retryWrites=true&w=majority';
+// const mongoUrl = process.env.MONGODB_URL || 'mongodb://Ibrahim:Mongodb@ds019996.mlab.com:19996/heroku_btfnf2m2' ; 
+const mongoUrl = 'mongodb+srv://Ibrahim:Mongodb@cluster0-wvxxp.mongodb.net/cms?retryWrites=true&w=majority';
 
 let db = null;
 const client = new MongoClient (mongoUrl, { useUnifiedTopology: true } );
