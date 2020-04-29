@@ -1,4 +1,5 @@
 const express = require('express');
+const path = require('path');
 
 const session = require('express-session');
 
@@ -18,6 +19,16 @@ app.use(function (req, res, next) {
     res.setHeader("Access-Control-Allow-Headers", "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers");
     next()
 });
+
+if (process.env.NODE_ENV === 'production') {
+    // app.use(express.static('react/build'));
+    // app.get('*', (request, response, next) => {
+    //     response.sendFile(path.resolve(__dirname, 'react', 'build', 'index.html'));
+    // })
+    app.get('*', (request, response, next) => {
+        response.send('We are in business');
+    })
+}
 
 app.use(session ({
     secret: 'secret',
