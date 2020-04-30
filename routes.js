@@ -7,25 +7,11 @@ const database = require('./database');
 const router = express.Router();
 
 
-
-router.use( (request, response, next) => {
-    if (request.session.loggedIn === undefined) {
-        request.session.user = null;
-        request.session.loggedIn = false;
-    }
-    console.log(request.session);
-    next ();
-})
-
-
-
 // User Routes
 router.get('/api/users/', (request, response, next) => {
     database.getAllUsers( (users) => {
             let data = {
             users: users,
-            session: request.session,
-            sessionId: request.sessionID
         }
         response.send(data);
     });
@@ -34,79 +20,18 @@ router.get('/api/users/', (request, response, next) => {
 
 
 
-// router.get('/api/users/:userId', (request, response, next) => {
-//     id = ObjectId(request.params.userId);
-//     database.getUser(id, (result) => {
-//         let data = {
-//             result: result,
-//             session: request.session
-//         }
-//         response.send(data);
-//     });
-// })
-
-
-router.post('/api/users/login', (request, response, next) => {
-    let user = request.body;
-    // console.log(user);
-    database.loginUser (user, (registeredUser, message) => {
-        if (registeredUser) {
-            request.session.loggedIn = true;
-            request.session.user = registeredUser;
-
-        } else {
-            request.session.loggedIn = false;
-        }
+router.get('/api/users/:userId', (request, response, next) => {
+    id = ObjectId(request.params.userId);
+    database.getUser(id, (result) => {
         let data = {
-            message: message,
-            session: request.session,
-            sessionId: request.sessionID
+            result: result
         }
-        console.log(data.message);
-        console.log(data.session)
-        response.json(data);
-        
-    })
+        response.send(data);
+    });
 })
 
-//------------------------------------------------------------------------------------------------------------------------------------------------------
-// router.get('/api/users/login/:user', (request, response, next) => {
-//     let user = request.params.user;
-//     request.session.user = user;
-//     request.session.loggedIn = true;
 
-//     let data = {
-//         user: request.session.user,
-//         status: request.session.loggedIn
-//     }
-
-    // database.saveSessionToDatabase(request.session, (error, result) => {
-        // response.send(request.session);
-    // })
-// })
-
-
-router.get('/api/users/logout', (request, response, next) => {
-    
-    // request.session.destroy( () => {
-    //     response.send('You are now logged out');
-    // })
-    // database.endSession(sessionId, (error, result) => {
-        // request.session.user = null;
-        // request.session.loggedIn = false;
-        let session = {
-            user: request.session.user,
-            loggedIn: request.session.loggedIn
-        }
-        console.log(session);
-        response.send(session);
-    // })
-    
-    
-})
-
-//------------------------------------------------------------------------------------------------------------------------------------------------------
-
+// Login function goes here....
 
 
 router.post('/api/users/add', (request, response, next) => {
@@ -145,19 +70,16 @@ router.post('/api/posts/add', (request, response, next) => {
     database.savePost(post, (message) => {
         let data = {
             message: message,
-            session: request.session
         }
-        response.send(message);
+        response.send(data);
     })
-    console.log(post);
 })
 
 
 router.get('/api/posts/', (request, response, next) => {
         database.getAllPosts( (posts) => {
             let data = {
-                posts: posts,
-                session: request.session
+                posts: posts
             }
             response.send(data);
         })
@@ -174,7 +96,8 @@ router.get('/api/posts/:postId', (request, response, next) => {
 
 router.put('/api/posts/update', (request, response, next) => {
     post = request.body;
-    database.updatePost (post, (result) => {
+    database.updatePost (post, (message) => {
+        response.send(message);
     })
 })
 

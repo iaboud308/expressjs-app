@@ -47,34 +47,6 @@ function getDb (mongoFunction) {
     }
 }
 
-// Session Specific Functions
-//------------------------------------------------------------------------------------------------------------------------------------------------------
-
-function saveSessionToDatabase (session, callback) {
-    getDb ( () => {
-        db.collection('sessions').findOne({user: session.user}, (error, result) => {
-            if (result === null) {
-                db.collection('sessions').insertOne({sessionId: session.id, user: session.user}, callback);
-            } else {
-                callback ('whatever', 'whatever');
-            }
-        })
-        
-    })
-}
-
-
-
-function endSession (sessionId, callback) {
-    getDb ( () => {
-        db.collection('sessions').deleteOne({sessionId: sessionId}, callback)
-    })
-}
-
-
-
-
-//------------------------------------------------------------------------------------------------------------------------------------------------------
 
 // User Specific Functions
 
@@ -266,7 +238,6 @@ function updatePost (post, callback) {
                 message = 'Update Successfull';
             }
             callback(message);
-            console.log(result);
         })
     })
 }
