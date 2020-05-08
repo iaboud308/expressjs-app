@@ -53,6 +53,7 @@ router.put('/api/users/update', (request, response, next) =>{
 
 router.delete('/api/users/delete', (request, response, next) => {
     userId = request.body.id;
+    console.log(request.body);
     userId = ObjectId(userId);
     database.deleteUser(userId, (message) => {
         response.send(message);
