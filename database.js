@@ -262,8 +262,6 @@ function deletePost (postId, callback) {
 
 
 
-module.exports.saveSessionToDatabase = saveSessionToDatabase;
-module.exports.endSession = endSession;
 
 module.exports.getAllUsers = getAllUsers;
 module.exports.getUser = getUser;
