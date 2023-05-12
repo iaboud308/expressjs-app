@@ -16,7 +16,7 @@ if (process.env.NODE_ENV === undefined) {
 }
 
 
-const mongoUrl = `mongodb://rooty:123456@hyderion.com:27017/?authMechanism=DEFAULT`;
+const mongoUrl = `mongodb://${mongoUser}:${mongoPassword}@hyderion.com:27017/?authMechanism=DEFAULT`;
 console.log(mongoUrl);
 
 let db = null;
