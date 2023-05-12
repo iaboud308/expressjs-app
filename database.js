@@ -2,7 +2,6 @@ const MongoClient = require('mongodb').MongoClient;
 const ObjectId = require('mongodb').ObjectID;
 const bcryptjs = require('bcryptjs');
 
-
 let mongoUser;
 let mongoPassword;
 
@@ -17,7 +16,7 @@ if (process.env.NODE_ENV === undefined) {
 }
 
 
-const mongoUrl = `mongodb+srv://${mongoUser}:${mongoPassword}@cluster0-wvxxp.mongodb.net/cms?retryWrites=true&w=majority`;
+const mongoUrl = `mongodb://rooty:123456@hyderion.com:27017/?authMechanism=DEFAULT`;
 console.log(mongoUrl);
 
 let db = null;
